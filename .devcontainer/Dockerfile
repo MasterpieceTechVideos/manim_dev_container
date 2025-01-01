@@ -1,4 +1,3 @@
-#FROM ubuntu:jammy
 FROM nvidia/opengl:base-ubuntu22.04
 
 # Add ubuntu user with same UID and GID as your host system, if it doesn't already exist
@@ -25,7 +24,7 @@ RUN sudo usermod --append --groups video $USERNAME
 # Update all packages
 RUN sudo apt update && sudo apt upgrade -y
 
-# Install Git
+# Install packages
 RUN sudo apt install -y \
     build-essential \
     ffmpeg \
