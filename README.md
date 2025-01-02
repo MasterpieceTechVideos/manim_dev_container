@@ -8,33 +8,58 @@ Dev Container for [Manim animation engine](https://3b1b.github.io/manim/). Conta
 
 # Getting Started
 1. Clone the repository
-    ```sh
-    git clone https://github.com/MasterpieceTechVideos/manim_dev_container.git
-    ```
+
+```sh
+git clone https://github.com/MasterpieceTechVideos/manim_dev_container.git
+```
+
 2. Reopen in Container
 
 
 3. Install region-based packages
-    ```sh
-    sudo apt-get install -y texlive-formats-extra texlive-fonts-extra 
-    ```
-4. Run example scene defined in ```~/manim/example_scenes.py``` to generate video
-    ```sh
-    manimgl ~/manim/example_scenes.py AnimatingMethods -o --hd
-    ```
 
-# Optional
-No extensive tests have been done to ensure all required packages have been installed. Particularly LaTeX libraries defined in ```tex``` Debian packages. Additional ```tex``` packages can be installed incase of any LaTeX related errors. Refer to [wkrea/textlive-full-beefless.md](https://gist.github.com/wkrea/b91e3d14f35d741cf6b05e57dfad8faf) Gist for more on installation options.
+```sh
+sudo apt-get install -y texlive-formats-extra texlive-fonts-extra 
+```
+
+4. Run example scene defined in ```~/manim/example_scenes.py``` to generate video
+
+```sh
+manimgl ~/manim/example_scenes.py AnimatingMethods -o --hd
+```
+
+5. Get more examples from:
+    - [3b1b.github.io/manim](https://3b1b.github.io/manim/getting_started/quickstart.html)
+    - [manim.readthedocs.io](https://manim.readthedocs.io)
+    - [github.com/3b1b/videos](https://github.com/3b1b/videos)
+
+# NB
+Additional ```tex``` packages can be installed incase of any LaTeX related errors. Refer to [wkrea/textlive-full-beefless.md](https://gist.github.com/wkrea/b91e3d14f35d741cf6b05e57dfad8faf) Gist for more on installation options.
 
 # Usage
-1. Read the [docs](https://3b1b.github.io/manim/getting_started/quickstart.html)
-2. Fork the repository
-3. Add your own scene definitions in the ```src``` folder
-4. Generate your animations
-    ```sh
-    manimgl src/start.py SquareToCircle -ol
-    ```
-5. Get more examples from [Grant Sanderson of 3Blue1Brown](https://github.com/3b1b/videos)
+1. Fork the repository
+2. Add your own scene definitions in the ```src``` folder e.g.
+```sh
+echo "
+from manimlib import *
+
+class SquareToCircle(Scene):
+    def construct(self):
+        circle = Circle()
+        circle.set_fill(BLUE, opacity=0.5)
+        circle.set_stroke(BLUE_E, width=4)
+        square = Square()
+
+        self.play(ShowCreation(square))
+        self.wait()
+        self.play(ReplacementTransform(square, circle))
+        self.wait()
+" >> src/start.py
+```
+3. Generate your animations
+```sh
+manimgl src/start.py SquareToCircle -ol
+```
 
 # ToDo
 Create Docker Hub image
